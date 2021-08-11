@@ -76,15 +76,15 @@ function Form(props) {
           <button type="submit" data-testid='btnTest'>GO!</button>
         </label>
         <label className="methods">
-          <span id="get" onClick={(e) => { setmethod(e.target.id); settextarea(false) }}>GET</span>
-          <span id="post" onClick={(e) => { setmethod(e.target.id); settextarea(true) }}>POST</span>
-          <span id="put" onClick={(e) => { setmethod(e.target.id); settextarea(true) }}>PUT</span>
-          <span id="delete" onClick={(e) => { setmethod(e.target.id); settextarea(false) }}>DELETE</span>
+          <span tabindex='4' id="get" onClick={(e) => { setmethod(e.target.id); settextarea(false) }}>GET</span>
+          <span tabindex='4' id="post" onClick={(e) => { setmethod(e.target.id); settextarea(true) }}>POST</span>
+          <span tabindex='4' id="put" onClick={(e) => { setmethod(e.target.id); settextarea(true) }}>PUT</span>
+          <span tabindex='4' id="delete" onClick={(e) => { setmethod(e.target.id); settextarea(false) }}>DELETE</span>
         </label>
         {textarea &&
-          <label >
-            <span>textarea: </span>
-            <input name='dataBody' type='text' onChange={(e) => setdataBody(e.target.value)} />
+          <label className="textarea">
+            <span>request body: </span>
+            <textarea name='dataBody' type='text' onChange={(e) => setdataBody(e.target.value)}></textarea>
           </label>
         }
 
