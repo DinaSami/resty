@@ -9,7 +9,9 @@ form {
   label {
     display: flex;
     margin: 1rem 0;
-
+    // &.input{
+    //   height: 154px;
+    // }
     &.methods {
       span {
         cursor: pointer;
