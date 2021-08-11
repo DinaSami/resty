@@ -7,7 +7,7 @@
 
 [Action](https://github.com/DinaSami/resty/actions)
 
-[deploy]()
+[deploy](https://61131489693e9e216dce4fc8--zen-panini-d652fe.netlify.app/)
 
 ## UML
 ![preview](./UML.png)
