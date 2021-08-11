@@ -45,6 +45,7 @@ function Form(props) {
   const [url, seturl] = useState('');
   const [textarea, settextarea] = useState(false);
   const [dataBody, setdataBody] = useState('')
+  const [arrayMethods, setarrayMethods] = useState([])
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -54,13 +55,17 @@ function Form(props) {
         url: url,
         dataBody: dataBody
       };
-
+      arrayMethods.push(formData)
+      // setarrayMethods(...arrayMethods,formData)
+// console.log('teeeest',arrayMethods);
       const raw = await fetch(formData.url)
       const data = await raw.json();
 
       // console.log('data', data);
+      console.log('setarrayMethods', data);
 
-      props.handleApiCall(formData, data);
+      props.handleApiCall(formData, data,arrayMethods);
+
       // props.loading(true);
     } catch (error) {
       console.log(error);
