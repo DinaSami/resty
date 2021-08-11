@@ -56,7 +56,7 @@ function Form(props) {
         dataBody: dataBody
       };
       arrayMethods.push(formData)
-      // setarrayMethods(...arrayMethods,formData)
+      setarrayMethods(...arrayMethods,formData)
 // console.log('teeeest',arrayMethods);
       const raw = await fetch(formData.url)
       const data = await raw.json();
@@ -73,7 +73,7 @@ function Form(props) {
   }
 
   return (
-    
+
     <>
       <form onSubmit={handleSubmit}>
         <label >
