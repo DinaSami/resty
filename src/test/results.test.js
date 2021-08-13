@@ -26,6 +26,6 @@ test('renders null for results before subitting Url', () => {
     render(<Results />);
     const resultsPreElement = screen.getByTestId('testResult');
     expect(resultsPreElement).toBeInTheDocument();
-    expect(resultsPreElement).toContainHTML('<div data-testid="testResult"><section><h3>"Headers : "</h3><pre style="color: green; background-color: lightgrey; padding: 15px; font-family: Georama;" /></section><section><h3>"Results : "</h3><pre style="color: green; background-color: lightgrey; padding: 15px; font-family: Georama;" /></section></div>')
-    expect(resultsPreElement).toHaveTextContent('"Headers : ""Results : "');
+    expect(resultsPreElement).toContainHTML('<div data-testid="testResult" />')
+    expect(resultsPreElement).toHaveTextContent('');
   });
