@@ -3,7 +3,9 @@ import React from 'react'
 function index(props) {
     return (
         <div>
+            
             {props.history.map(ele => {
+                // console.log('props.history',props.history);
                 return (
                     <>
                         <h4>Method :'{ele.method}'</h4>
