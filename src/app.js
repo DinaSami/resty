@@ -7,17 +7,24 @@ import Footer from './components/footer';
 import Form from './components/form';
 import Results from './components/results';
 import History from './components/history/index';
-import { useState, useEffect } from 'react';
+import { useState, useEffect ,useReducer} from 'react';
 import axios from 'axios';
 
+
+
 function App(props) {
+
+  const initialState = {
+    loading: false,
+    history: []
+  };
+  
+
   const [data, setdata] = useState(null);
   const [requestParams, setrequestParams] = useState({});
-  const [loading, setloading] = useState(false)
-  const [history, sethistory] = useState([]);
+  const [state, dispatch] = useReducer(reducerFunction, initialState)
 
   useEffect(() => {
-    // console.log('from effect requestParams',requestParams);
     (async () => {
       if (requestParams.url && requestParams.method === 'get') {
 
@@ -29,16 +36,33 @@ function App(props) {
           Headers: 'application/json',
           results: dataApi.data
         };
-        // console.log('dataApi', dataApi);
          setdata(data);
-         setloading(true)
-        //  console.log('requestParams',[requestParams]);
-         sethistory([requestParams])
       }
     })()
   }, [requestParams])
 
- 
+
+
+  function reducerFunction(state = initialState, action) {
+    const { type, payload } = action;
+    switch (type) {
+      case 'Loading_State':
+        const history = [...state.history, payload];
+        return { history,loading: true };
+      default:
+        return state;
+    }
+  }
+  function changeLoadingState(requestParams) {
+    return {
+      type: 'Loading_State',
+      payload: {
+        'url':requestParams.url,
+        'method':requestParams.method
+      }
+    };
+  }
+
   function callApi(requestParams, data2, arrayMethods) {
     const data = {
       Headers: 'application/json',
@@ -48,10 +72,9 @@ function App(props) {
 
     setdata(data);
     setrequestParams(requestParams)
-    setloading(true)
-    sethistory(arrayMethods)
-    // console.log(arrayMethods,'arrayMethods0000000000');
-    // console.log(history,'sethistory');
+    dispatch(changeLoadingState(requestParams))  
+    localStorage.setItem('History', JSON.stringify(state.history));
+    console.log(state.history);
   }
   return (
 
@@ -59,13 +82,13 @@ function App(props) {
       <Header />
       <div>Request Method: {requestParams.method}</div>
       <div>URL: {requestParams.url}</div>
-      <Form handleApiCall={callApi} loading={loading} setrequestParams={setrequestParams}/>
-      <History history={history} />
-      {loading ? <Results data={data} /> : 'loading...'}
+      <Form handleApiCall={callApi} loading={state.loading} setrequestParams={setrequestParams}/>
+      <History history={state.history}/>
+      {state.loading ? <Results data={data} /> : 'loading...'}
       <Footer />
     </React.Fragment>
 
   )
 }
 
-export default App
+export default App;
