@@ -8,5 +8,4 @@ it('run button', async () => {
     const button = screen.getByTestId('btnTest');
     expect(button).toBeInTheDocument();
     fireEvent.click(button);
-    // await waitFor(() => expect(handleApiCall).toHaveBeenCalled());
 });
